@@ -6,14 +6,21 @@ import { MutableRefObject, useEffect } from "react";
 export default function useDashboardFullLength(
   dashboardRef: MutableRefObject<HTMLElement | undefined>
 ) {
-  //Calls setHeight() once, then again when resize happens.
   useEffect(() => {
+    //Breakpoint like media query to set height to 100%
+    const breakpiontForFullHeight = 990;
+
+    //Calls setHeight() once, then again when resize happens.
     function setHeight() {
+      const skipSetHeight = window.innerWidth < breakpiontForFullHeight;
       if (dashboardRef.current) {
-        const height =
-          window.innerHeight - dashboardRef.current.offsetTop + "px";
-        dashboardRef.current.style.height = height;
-        dashboardRef.current.style.maxHeight = height;
+        if (!skipSetHeight) {
+          const height =
+            window.innerHeight - dashboardRef.current.offsetTop + "px";
+          dashboardRef.current.style.height = height;
+        } else {
+          dashboardRef.current.style.height = "100%";
+        }
       }
     }
     setHeight();

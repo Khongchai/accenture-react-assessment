@@ -59,7 +59,7 @@ const BackgroundDecor = () => {
         bottom="0"
         left="0"
         {...sharedStyles}
-        {...displayBreakPoints.hideOnSmall}
+        {...displayBreakPoints.hideOnMedium}
       />
     </Box>
   );

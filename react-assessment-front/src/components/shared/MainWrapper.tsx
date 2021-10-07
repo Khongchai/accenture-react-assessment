@@ -9,8 +9,9 @@ const MainWrapper: React.FC = ({ children }) => {
   return (
     <Box
       id="main-wrapper"
-      padding={["0 1rem", null, "0 3rem", null, "0 11rem"]}
+      padding={["0 0.2rem", null, "0 3rem", null, "0 11rem"]}
       minH="100vh"
+      height="100%"
     >
       <HeaderWithLogo />
       {children}

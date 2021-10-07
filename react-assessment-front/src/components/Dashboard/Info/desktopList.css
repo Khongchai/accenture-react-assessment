@@ -1,0 +1,7 @@
+#table-list > :nth-child(2n + 1) {
+  background: white;
+}
+td,
+th {
+  padding: 0.75rem;
+}

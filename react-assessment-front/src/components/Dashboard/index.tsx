@@ -28,7 +28,7 @@ const Dashboard: React.FC = () => {
     <Box
       ref={bg as any}
       backgroundColor={["white", null, null, "lightBlue"]}
-      borderRadius="90px 90px 0 0"
+      borderRadius={["15px 15px 0 0", null, null, "90px 90px 0 0"]}
       minHeight={["500px", null, "600px", null, "700px"]}
       padding={["1rem", null, null, "70px 2.5rem", "70px"]}
       width="100%"

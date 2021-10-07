@@ -5,13 +5,19 @@ import LoadingIcon from "../../shared/LoadingIcon";
 import DesktopList from "./DesktopList";
 import MobileList from "./MobileList";
 
-const Info: React.FC<{
+interface InfoType {
   contacts?: Contact[];
   setRefetchtoggle: React.Dispatch<React.SetStateAction<boolean>>;
   allowEdit: boolean;
-}> = ({ contacts, setRefetchtoggle: setRefetchToggle, allowEdit }) => {
+}
+
+const Info: React.FC<InfoType> = ({
+  contacts,
+  setRefetchtoggle: setRefetchToggle,
+  allowEdit,
+}) => {
   return (
-    <Box height="90%" overflowY="auto">
+    <Box height="90%" overflowY={["unset", null, null, "auto"]}>
       {contacts ? (
         <>
           <Box display={["none", null, null, "block"]}>

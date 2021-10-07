@@ -5,14 +5,20 @@ import React, { useState } from "react";
 interface EditableTextProps {
   defaultText: string;
 
-  //Events to trigger when text is changed
+  /*
+   * Event to trigger when text is successfully saved
+   */
   onSave?: (newData: string) => any;
 
-  //On what condition will change be rejected
+  /*
+   * On what condition will change be rejected
+   */
   rejectCondition?: (newData: string) => any;
 
-  //What happens when there is an error
-  errorHandler?: () => any;
+  /*
+   * Text to show when rejected
+   */
+  rejectionText?: () => any;
 }
 
 /**
@@ -23,7 +29,7 @@ const EditableText: React.FC<EditableTextProps> = ({
   defaultText,
   onSave,
   rejectCondition,
-  errorHandler,
+  rejectionText,
 }) => {
   const [editable, setEditable] = useState(false);
 
@@ -39,6 +45,9 @@ const EditableText: React.FC<EditableTextProps> = ({
   };
 
   const inputEvents = {
+    onFocus: (e: React.FocusEvent<HTMLInputElement>) => {
+      e.target.style.width = e.target.value.length + "ch";
+    },
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
       setText(e.target.value);
     },
@@ -71,7 +80,6 @@ const EditableText: React.FC<EditableTextProps> = ({
     <Box width="fit-content">
       {editable ? (
         <Input
-          type="email"
           padding="0.5"
           width="fit-content"
           autoFocus
@@ -79,7 +87,7 @@ const EditableText: React.FC<EditableTextProps> = ({
           {...inputEvents}
         />
       ) : (
-        <Text {...textEvents} cursor="pointer">
+        <Text padding="1" {...textEvents} cursor="pointer">
           {text}
         </Text>
       )}
