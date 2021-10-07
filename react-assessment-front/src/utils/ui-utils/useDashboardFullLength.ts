@@ -10,8 +10,10 @@ export default function useDashboardFullLength(
   useEffect(() => {
     function setHeight() {
       if (dashboardRef.current) {
-        dashboardRef.current.style.height =
+        const height =
           window.innerHeight - dashboardRef.current.offsetTop + "px";
+        dashboardRef.current.style.height = height;
+        dashboardRef.current.style.maxHeight = height;
       }
     }
     setHeight();

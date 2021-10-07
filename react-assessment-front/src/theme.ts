@@ -8,6 +8,7 @@ const theme = extendTheme({
   colors: {
     primary: "#165A82",
     secondary: "#3A82F3",
+    danger: "#FA5959",
     lightBlue: "#F2F7FF",
   },
   components: {

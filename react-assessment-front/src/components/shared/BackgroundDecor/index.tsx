@@ -29,7 +29,7 @@ const BackgroundDecor = () => {
         left="0"
         {...sharedStyles}
       />
-      <Box
+      {/* <Box
         className="backgrounds"
         backgroundImage="url('decorations/background/top-right.svg')"
         width="350px"
@@ -50,7 +50,7 @@ const BackgroundDecor = () => {
         right="0"
         {...sharedStyles}
         {...displayBreakPoints.hideOnMedium}
-      />
+      /> */}
       <Box
         className="backgrounds"
         backgroundImage="url('decorations/background/bottom-left.svg')"

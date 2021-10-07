@@ -7,7 +7,7 @@ interface HeaderWithLogoProps {}
 const HeaderWithLogo: React.FC<HeaderWithLogoProps> = ({}) => {
   return (
     <Flex
-      padding={["3rem 0", null, null, "3rem 5rem"]}
+      padding={["3rem 0", null, null, "2.4rem 5rem"]}
       width="100%"
       height="fit-content"
       align="center"
