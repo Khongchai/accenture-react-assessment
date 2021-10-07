@@ -6,7 +6,10 @@ interface EditableTextProps {
   defaultText: string;
 
   //Events to trigger when text is changed
-  onTextChanged?: () => any;
+  onSave?: (newData: string) => any;
+
+  //On what condition will change be rejected
+  rejectCondition?: (newData: string) => any;
 
   //What happens when there is an error
   errorHandler?: () => any;
@@ -15,9 +18,11 @@ interface EditableTextProps {
 /**
  * Chakra UI provides editable component, but it does not handle the case when user deletes everything and unfocus component
  */
+//TODO => refactor logic
 const EditableText: React.FC<EditableTextProps> = ({
   defaultText,
-  onTextChanged: extraAction,
+  onSave,
+  rejectCondition,
   errorHandler,
 }) => {
   const [editable, setEditable] = useState(false);
@@ -36,23 +41,43 @@ const EditableText: React.FC<EditableTextProps> = ({
   const inputEvents = {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
       setText(e.target.value);
-      extraAction && extraAction();
     },
     onBlur: (e: React.ChangeEvent<HTMLInputElement>) => {
       if (!e.target.value.length) {
-        setText(fallbackText);
+        editOffAndRestoreFallback();
+      } else {
+        editOffAndSave(e.target.value);
       }
-      setEditable(false);
-    },
-    onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => {
-      e.key === "Enter" && setEditable(false);
     },
   };
 
+  function editOffAndSave(newData: string) {
+    if (rejectCondition) {
+      const reject = rejectCondition(newData);
+      if (reject) {
+        editOffAndRestoreFallback();
+        return;
+      }
+    }
+    onSave && onSave(newData);
+    setEditable(false);
+  }
+
+  function editOffAndRestoreFallback() {
+    setText(fallbackText);
+    setEditable(false);
+  }
   return (
     <Box width="fit-content">
       {editable ? (
-        <Input autoFocus value={text} {...inputEvents} />
+        <Input
+          type="email"
+          padding="0.5"
+          width="fit-content"
+          autoFocus
+          value={text}
+          {...inputEvents}
+        />
       ) : (
         <Text {...textEvents} cursor="pointer">
           {text}

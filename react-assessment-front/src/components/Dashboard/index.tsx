@@ -1,25 +1,27 @@
 import { Box } from "@chakra-ui/layout";
-import { Divider } from "@chakra-ui/react";
-import React, { useEffect, useRef, useState } from "react";
+import { Divider, Text } from "@chakra-ui/react";
+import React, { useRef, useState } from "react";
 import Contact from "../../types/Contact";
 import useDashboardFullLength from "../../utils/ui-utils/useDashboardFullLength";
 import useFetch from "../../utils/useFetch";
 import ActionSection from "./ActionSection";
+import EditModeText from "./EditModeText";
 import Info from "./Info";
 
-const DashboardBackground: React.FC = ({ children }) => {
+const Dashboard: React.FC = () => {
   const bg = useRef<HTMLElement>();
   useDashboardFullLength(bg);
 
   const [contacts, setContacts] = useState<Contact[]>();
-  const [refetchSwitch, setRefetchSwitch] = useState(false);
+  const [toggleRefetch, setRefetchToggle] = useState(false);
+  const [editMode, toggleEditMode] = useState(false);
 
   //TODO optional feature, do if time left
   const [page, setPage] = useState(1);
 
   useFetch(`http://localhost:3000/contacts?_page=${page}`, setContacts, [
     page,
-    refetchSwitch,
+    toggleRefetch,
   ]);
 
   return (
@@ -32,11 +34,18 @@ const DashboardBackground: React.FC = ({ children }) => {
       width="100%"
       height="100%"
     >
-      <ActionSection />
+      <ActionSection toggleEditMode={toggleEditMode} />
       <Divider marginTop="2rem" marginBottom="2rem" type="blue" />
-      <Info contacts={contacts} setRefetchSwitch={setRefetchSwitch} />
+      <EditModeText>
+        {editMode ? "Edit mode is now on, select any field to edit" : null}
+      </EditModeText>
+      <Info
+        allowEdit={editMode}
+        contacts={contacts}
+        setRefetchtoggle={setRefetchToggle}
+      />
     </Box>
   );
 };
 
-export default DashboardBackground;
+export default Dashboard;

@@ -7,7 +7,11 @@ import HeaderWithLogo from "./HeaderWithLogo";
  */
 const MainWrapper: React.FC = ({ children }) => {
   return (
-    <Box padding={["0 1rem", null, "0 3rem", null, "0 11rem"]} minH="100vh">
+    <Box
+      id="main-wrapper"
+      padding={["0 1rem", null, "0 3rem", null, "0 11rem"]}
+      minH="100vh"
+    >
       <HeaderWithLogo />
       {children}
     </Box>

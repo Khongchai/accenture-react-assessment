@@ -7,15 +7,17 @@ import MobileList from "./MobileList";
 
 const Info: React.FC<{
   contacts?: Contact[];
-  setRefetchSwitch: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ contacts, setRefetchSwitch }) => {
+  setRefetchtoggle: React.Dispatch<React.SetStateAction<boolean>>;
+  allowEdit: boolean;
+}> = ({ contacts, setRefetchtoggle: setRefetchToggle, allowEdit }) => {
   return (
     <Box height="90%" overflowY="auto">
       {contacts ? (
         <>
           <Box display={["none", null, null, "block"]}>
             <DesktopList
-              setRefetchSwitch={setRefetchSwitch}
+              allowEdit={allowEdit}
+              setRefetchToggle={setRefetchToggle}
               contacts={contacts}
             />
           </Box>

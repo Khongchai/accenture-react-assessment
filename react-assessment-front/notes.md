@@ -1,3 +1,6 @@
 include selawik font
 
-States to be managed globally => edit mode
+//Use redux
+States to be managed globally => edit mode, setRefetchToggle
+
+handle names too long
