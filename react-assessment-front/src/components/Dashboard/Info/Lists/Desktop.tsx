@@ -77,9 +77,13 @@ const ListForDesktop: React.FC<ListForDesktopType> = ({
       </td>
       <td style={{ textAlign: "right" }}>
         <DeleteButton
-          action={() => {
-            fetch(`http://localhost:3000/contacts/${contact.id}`, "DELETE");
-            setRefetchToggle((state) => !state);
+          action={async () => {
+            return fetch(
+              `http://localhost:3000/contacts/${contact.id}`,
+              "DELETE"
+            ).then(() => {
+              setRefetchToggle((state) => !state);
+            });
           }}
         />
       </td>

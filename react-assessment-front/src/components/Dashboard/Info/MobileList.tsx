@@ -7,7 +7,7 @@ const MobileList: React.FC<{ contacts: Contact[] }> = ({ contacts }) => {
   return (
     <Stack spacing={"1.5rem"} padding="2rem 0">
       {contacts.map((contact) => {
-        return <Mobile contact={contact} />;
+        return <Mobile key={contact.email} contact={contact} />;
       })}
     </Stack>
   );
