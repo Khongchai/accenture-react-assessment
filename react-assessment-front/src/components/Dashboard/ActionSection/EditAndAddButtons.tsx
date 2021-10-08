@@ -1,5 +1,6 @@
 import { Box, Img } from "@chakra-ui/react";
 import React from "react";
+import { Link } from "react-router-dom";
 import SecondaryBackgroundStyledButton from "../../../StyledElements/SecondaryBackgroundStyledButton";
 import SecondaryBorderStyledButton from "../../../StyledElements/SecondaryBorderStyledButton";
 
@@ -24,11 +25,13 @@ const EditAndAddContactsButtons: React.FC<{
           Edit Mode
         </SecondaryBorderStyledButton>
       </Box>
-      <SecondaryBackgroundStyledButton
-        buttonProps={{ leftIcon: <Img src="assets/person_add.svg" /> }}
-      >
-        Add Contacts
-      </SecondaryBackgroundStyledButton>
+      <Link to={"/add"}>
+        <SecondaryBackgroundStyledButton
+          buttonProps={{ leftIcon: <Img src="assets/person_add.svg" /> }}
+        >
+          Add Contacts
+        </SecondaryBackgroundStyledButton>
+      </Link>
     </Box>
   );
 };

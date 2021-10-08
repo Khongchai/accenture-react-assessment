@@ -2,11 +2,8 @@ import React from "react";
 import DeleteButton from "../../../../StyledElements/DeleteButton";
 import Contact from "../../../../types/Contact";
 import fetch from "../../../../utils/fetch";
-import {
-  ErrorMessageType,
-  useErrorModalMessageStore,
-} from "../../../GlobalStores/ErrorModalMessage";
-import EditableText from "../../../shared/EditableText";
+import getFieldErrorConditions from "../../../../utils/getFieldErrorConditions";
+import CustomizedEditableText from "./CustomizedEditableText";
 
 interface ListForDesktopType {
   contact: Contact;
@@ -19,90 +16,38 @@ const ListForDesktop: React.FC<ListForDesktopType> = ({
   setRefetchToggle,
   allowEdit,
 }) => {
-  function updateText(id: number, fieldName: string, newData: string) {
-    const body: any = {};
-    body[fieldName] = newData;
-
-    fetch(
-      `http://localhost:3000/contacts/${id}`,
-      "PATCH",
-      JSON.stringify(body)
-    );
-
-    setRefetchToggle((bool) => !bool);
-  }
-
-  const { errorMessageProps, setErrorState } = useErrorModalMessageStore(
-    (state) => state
-  );
-
   return (
     <tr>
       <td>{contact.id}</td>
       <td>
-        {allowEdit ? (
-          <EditableText
-            onSave={(newData: string) => {
-              updateText(contact.id, "name", newData);
-              setErrorState({ message: "" });
-            }}
-            defaultText={contact.name}
-            rejectCondition={(newData: string) => !!newData.match(/\d+/g)}
-            rejectionAction={() => {
-              setErrorState({
-                backgroundColor: "danger",
-                message: "This field does not allow numbers",
-              });
-            }}
-          />
-        ) : (
-          contact.name
-        )}
+        <CustomizedEditableText
+          allowEdit={allowEdit}
+          fieldId={contact.id}
+          fieldName={"name"}
+          fieldValue={contact.name}
+          setRefetchToggle={setRefetchToggle}
+          error={getFieldErrorConditions("name")}
+        />
       </td>
       <td>
-        {allowEdit ? (
-          <EditableText
-            onSave={(newData: string) => {
-              updateText(contact.id, "email", newData);
-              setErrorState({ ...errorMessageProps, message: "" });
-            }}
-            defaultText={contact.email}
-            rejectCondition={(newData: string) => !newData.includes("@")}
-            rejectionAction={() => {
-              setErrorState({
-                backgroundColor: "danger",
-                message: "Invalid email",
-              });
-            }}
-          />
-        ) : (
-          <a
-            href={`mailto:${contact.email}`}
-            style={{ color: "var(--chakra-colors-secondary)" }}
-          >
-            {contact.email}
-          </a>
-        )}
+        <CustomizedEditableText
+          allowEdit={allowEdit}
+          fieldId={contact.id}
+          fieldName={"email"}
+          fieldValue={contact.email}
+          setRefetchToggle={setRefetchToggle}
+          error={getFieldErrorConditions("email")}
+        />
       </td>
       <td>
-        {allowEdit ? (
-          <EditableText
-            onSave={(newData: string) => {
-              updateText(contact.id, "phone", newData);
-              setErrorState({ ...errorMessageProps, message: "" });
-            }}
-            defaultText={contact.phone}
-            rejectCondition={(newData: string) => newData[0] === "-"}
-            rejectionAction={() => {
-              setErrorState({
-                backgroundColor: "danger",
-                message: "Phone number cannot be negative",
-              });
-            }}
-          />
-        ) : (
-          contact.phone
-        )}
+        <CustomizedEditableText
+          allowEdit={allowEdit}
+          fieldId={contact.id}
+          fieldName={"phone"}
+          fieldValue={contact.phone}
+          setRefetchToggle={setRefetchToggle}
+          error={getFieldErrorConditions("phone")}
+        />
       </td>
       <td style={{ textAlign: "right" }}>
         <DeleteButton

@@ -5,11 +5,7 @@ import MainWrapper from "../components/shared/MainWrapper";
 interface LandingProps {}
 
 const Landing: React.FC<LandingProps> = ({}) => {
-  return (
-    <MainWrapper>
-      <Dashboard />
-    </MainWrapper>
-  );
+  return <Dashboard />;
 };
 
 export default Landing;

@@ -18,7 +18,7 @@ interface EditableTextProps {
   /*
    * Action to perform when change is rejected
    */
-  rejectionAction?: () => any;
+  rejectionAction?: (rejectedValue: string) => any;
 }
 
 /**
@@ -73,12 +73,12 @@ const EditableText: React.FC<EditableTextProps> = ({
   }
 
   function editOffAndRestoreFallback() {
-    rejectionAction && rejectionAction();
+    rejectionAction && rejectionAction(text);
     setText(fallbackText);
     setEditable(false);
   }
   return (
-    <Box width="fit-content">
+    <Box width="fit-content" pos="relative">
       {editable ? (
         <Input
           padding="0.5"
@@ -86,9 +86,12 @@ const EditableText: React.FC<EditableTextProps> = ({
           autoFocus
           value={text}
           {...inputEvents}
+          //prevent vertical cls
+          pos="absolute"
+          transform="translateY(-50%)"
         />
       ) : (
-        <Text padding="1" {...textEvents} cursor="pointer">
+        <Text {...textEvents} cursor="pointer">
           {text}
         </Text>
       )}
