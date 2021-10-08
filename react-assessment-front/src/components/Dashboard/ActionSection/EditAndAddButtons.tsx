@@ -3,12 +3,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SecondaryBackgroundStyledButton from "../../../StyledElements/SecondaryBackgroundStyledButton";
 import SecondaryBorderStyledButton from "../../../StyledElements/SecondaryBorderStyledButton";
+import { useEditModeToggleStore } from "../../GlobalStores/EditModeToggleStore";
 
-const EditAndAddContactsButtons: React.FC<{
-  toggleEditMode: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ toggleEditMode }) => {
+const EditAndAddContactsButtons: React.FC = () => {
+  const toggleEditMode = useEditModeToggleStore((state) => state.toggle);
   const editOnClick = () => {
-    toggleEditMode((on) => !on);
+    toggleEditMode();
   };
 
   const addOnClick = () => {};

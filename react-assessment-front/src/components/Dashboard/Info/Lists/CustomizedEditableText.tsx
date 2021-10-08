@@ -1,11 +1,11 @@
 import React from "react";
-import { Text } from "@chakra-ui/react";
+import { Text, Link } from "@chakra-ui/react";
 import { useErrorModalMessageStore } from "../../../GlobalStores/ErrorModalMessage";
 import EditableText from "../../../shared/EditableText";
 import fetch from "../../../../utils/fetch";
+import { useEditModeToggleStore } from "../../../GlobalStores/EditModeToggleStore";
 
 interface CustomizedEditableTextProps {
-  allowEdit: boolean;
   fieldName: string;
   fieldValue: string;
   fieldId: number;
@@ -17,7 +17,6 @@ interface CustomizedEditableTextProps {
 }
 
 const CustomizedEditableText: React.FC<CustomizedEditableTextProps> = ({
-  allowEdit,
   fieldName,
   fieldValue,
   fieldId,
@@ -37,6 +36,8 @@ const CustomizedEditableText: React.FC<CustomizedEditableTextProps> = ({
 
     refetch((bool) => !bool);
   }
+
+  const allowEdit = useEditModeToggleStore((state) => state.mode);
 
   return allowEdit ? (
     <EditableText
@@ -59,8 +60,12 @@ const CustomizedEditableText: React.FC<CustomizedEditableTextProps> = ({
             });
       }}
     />
+  ) : fieldName === "email" ? (
+    <Text color="secondary">
+      <Link href={`mailto:${fieldValue}`}>{fieldValue}</Link>
+    </Text>
   ) : (
-    <Text>{fieldValue}</Text>
+    <Text> {fieldValue}</Text>
   );
 };
 

@@ -9,5 +9,5 @@ export interface EditModeStoreType {
  */
 export const useEditModeToggleStore = create<EditModeStoreType>((set) => ({
   mode: false,
-  toggle: () => set((state) => ({ mode: state.mode })),
+  toggle: () => set((state) => ({ mode: !state.mode })),
 }));

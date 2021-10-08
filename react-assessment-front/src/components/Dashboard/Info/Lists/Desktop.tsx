@@ -8,20 +8,17 @@ import CustomizedEditableText from "./CustomizedEditableText";
 interface ListForDesktopType {
   contact: Contact;
   setRefetchToggle: React.Dispatch<React.SetStateAction<boolean>>;
-  allowEdit: boolean;
 }
 
 const ListForDesktop: React.FC<ListForDesktopType> = ({
   contact,
   setRefetchToggle,
-  allowEdit,
 }) => {
   return (
     <tr>
       <td>{contact.id}</td>
       <td>
         <CustomizedEditableText
-          allowEdit={allowEdit}
           fieldId={contact.id}
           fieldName={"name"}
           fieldValue={contact.name}
@@ -31,7 +28,6 @@ const ListForDesktop: React.FC<ListForDesktopType> = ({
       </td>
       <td>
         <CustomizedEditableText
-          allowEdit={allowEdit}
           fieldId={contact.id}
           fieldName={"email"}
           fieldValue={contact.email}
@@ -41,7 +37,6 @@ const ListForDesktop: React.FC<ListForDesktopType> = ({
       </td>
       <td>
         <CustomizedEditableText
-          allowEdit={allowEdit}
           fieldId={contact.id}
           fieldName={"phone"}
           fieldValue={contact.phone}

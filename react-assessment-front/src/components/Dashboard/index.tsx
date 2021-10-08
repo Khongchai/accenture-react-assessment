@@ -14,7 +14,6 @@ const Dashboard: React.FC = () => {
 
   const [contacts, setContacts] = useState<Contact[]>();
   const [toggleRefetch, setRefetchToggle] = useState(false);
-  const [editMode, toggleEditMode] = useState(false);
 
   //TODO optional feature, do if time left
   const [page, setPage] = useState(1);
@@ -34,16 +33,11 @@ const Dashboard: React.FC = () => {
       width="100%"
       height="100%"
     >
-      <ActionSection toggleEditMode={toggleEditMode} />
+      <ActionSection />
       <Divider marginTop="2rem" marginBottom="2rem" type="blue" />
-      <EditModeText>
-        {editMode ? "Edit mode is now on, select any field to edit" : null}
-      </EditModeText>
-      <Info
-        allowEdit={editMode}
-        contacts={contacts}
-        setRefetchtoggle={setRefetchToggle}
-      />
+      <EditModeText />
+
+      <Info contacts={contacts} setRefetchtoggle={setRefetchToggle} />
     </Box>
   );
 };

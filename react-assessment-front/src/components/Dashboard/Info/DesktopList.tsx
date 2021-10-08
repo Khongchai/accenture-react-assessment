@@ -7,13 +7,11 @@ import "./desktopList.css";
 interface DesktopListType {
   contacts: Contact[];
   setRefetchToggle: React.Dispatch<React.SetStateAction<boolean>>;
-  allowEdit: boolean;
 }
 
 const DesktopList: React.FC<DesktopListType> = ({
   contacts,
   setRefetchToggle,
-  allowEdit,
 }) => {
   return (
     <Box>
@@ -39,7 +37,6 @@ const DesktopList: React.FC<DesktopListType> = ({
               key={contact.email}
               setRefetchToggle={setRefetchToggle}
               contact={contact}
-              allowEdit={allowEdit}
             />
           ))}
         </tbody>
