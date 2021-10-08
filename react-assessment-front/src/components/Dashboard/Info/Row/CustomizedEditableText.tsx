@@ -4,12 +4,12 @@ import { useErrorModalMessageStore } from "../../../GlobalStores/ErrorModalMessa
 import EditableText from "../../../shared/EditableText";
 import fetch from "../../../../utils/fetch";
 import { useEditModeToggleStore } from "../../../GlobalStores/EditModeToggleStore";
+import { useRefetchToggleStore } from "../../../GlobalStores/RefetchToggleStore";
 
 interface CustomizedEditableTextProps {
   fieldName: string;
   fieldValue: string;
   fieldId: number;
-  setRefetchToggle?: React.Dispatch<React.SetStateAction<boolean>>;
   error: {
     condition: (newData: string) => any;
     message: string;
@@ -20,10 +20,12 @@ const CustomizedEditableText: React.FC<CustomizedEditableTextProps> = ({
   fieldName,
   fieldValue,
   fieldId,
-  setRefetchToggle,
   error,
 }) => {
   const { setErrorState } = useErrorModalMessageStore((state) => state);
+
+  const { toggle: toggleRefetch } = useRefetchToggleStore((state) => state);
+
   function updateText(id: number, fieldName: string, newData: string) {
     const body: any = {};
     body[fieldName] = newData;
@@ -34,7 +36,7 @@ const CustomizedEditableText: React.FC<CustomizedEditableTextProps> = ({
       JSON.stringify(body)
     );
 
-    setRefetchToggle && setRefetchToggle((state) => !state);
+    toggleRefetch();
   }
 
   const allowEdit = useEditModeToggleStore((state) => state.mode);

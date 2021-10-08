@@ -6,13 +6,9 @@ import "./desktopList.css";
 
 interface DesktopListType {
   contacts: Contact[];
-  setRefetchToggle?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const DesktopList: React.FC<DesktopListType> = ({
-  contacts,
-  setRefetchToggle,
-}) => {
+const DesktopList: React.FC<DesktopListType> = ({ contacts }) => {
   return (
     <Box>
       <table
@@ -33,11 +29,7 @@ const DesktopList: React.FC<DesktopListType> = ({
         </thead>
         <tbody id="table-list">
           {contacts.map((contact) => (
-            <ListForDesktop
-              key={contact.email}
-              setRefetchToggle={setRefetchToggle}
-              contact={contact}
-            />
+            <ListForDesktop key={contact.email} contact={contact} />
           ))}
         </tbody>
       </table>

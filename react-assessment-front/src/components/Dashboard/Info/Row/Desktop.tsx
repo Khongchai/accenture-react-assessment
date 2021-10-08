@@ -3,17 +3,15 @@ import DeleteButton from "../../../../StyledElements/DeleteButton";
 import Contact from "../../../../types/Contact";
 import fetch from "../../../../utils/fetch";
 import getFieldErrorConditions from "../../../../utils/getFieldErrorConditions";
+import { useRefetchToggleStore } from "../../../GlobalStores/RefetchToggleStore";
 import CustomizedEditableText from "./CustomizedEditableText";
 
 interface ListForDesktopType {
   contact: Contact;
-  setRefetchToggle?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ListForDesktop: React.FC<ListForDesktopType> = ({
-  contact,
-  setRefetchToggle,
-}) => {
+const ListForDesktop: React.FC<ListForDesktopType> = ({ contact }) => {
+  const { toggle: toggleRefetch } = useRefetchToggleStore((state) => state);
   return (
     <tr>
       <td>{contact.id}</td>
@@ -22,7 +20,6 @@ const ListForDesktop: React.FC<ListForDesktopType> = ({
           fieldId={contact.id}
           fieldName={"name"}
           fieldValue={contact.name}
-          setRefetchToggle={setRefetchToggle}
           error={getFieldErrorConditions("name")}
         />
       </td>
@@ -31,7 +28,6 @@ const ListForDesktop: React.FC<ListForDesktopType> = ({
           fieldId={contact.id}
           fieldName={"email"}
           fieldValue={contact.email}
-          setRefetchToggle={setRefetchToggle}
           error={getFieldErrorConditions("email")}
         />
       </td>
@@ -40,23 +36,20 @@ const ListForDesktop: React.FC<ListForDesktopType> = ({
           fieldId={contact.id}
           fieldName={"phone"}
           fieldValue={contact.phone}
-          setRefetchToggle={setRefetchToggle}
           error={getFieldErrorConditions("phone")}
         />
       </td>
       <td style={{ textAlign: "right" }}>
-        {setRefetchToggle ? (
-          <DeleteButton
-            action={async () => {
-              return fetch(
-                `http://localhost:3000/contacts/${contact.id}`,
-                "DELETE"
-              ).then(() => {
-                setRefetchToggle && setRefetchToggle((state) => !state);
-              });
-            }}
-          />
-        ) : null}
+        <DeleteButton
+          action={async () => {
+            return fetch(
+              `http://localhost:3000/contacts/${contact.id}`,
+              "DELETE"
+            ).then(() => {
+              toggleRefetch();
+            });
+          }}
+        />
       </td>
     </tr>
   );

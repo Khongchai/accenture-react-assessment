@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/layout";
-import { Divider, Text } from "@chakra-ui/react";
+import { Divider } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
 import Contact from "../../types/Contact";
 import useDashboardFullLength from "../../utils/ui-utils/useDashboardFullLength";
@@ -15,7 +15,6 @@ const Dashboard: React.FC = () => {
 
   const [contacts, setContacts] = useState<Contact[]>();
   const refetch = useRefetchToggleStore((state) => state.refetch);
-  const [toggleRefetch, setRefetchToggle] = useState(false);
 
   //TODO optional feature, do if time left
   const [page, setPage] = useState(1);
@@ -37,7 +36,7 @@ const Dashboard: React.FC = () => {
       <Box margin="1.25rem 0">
         <EditModeText />
       </Box>
-      <Info contacts={contacts} setRefetchtoggle={setRefetchToggle} />
+      <Info contacts={contacts} />
     </Box>
   );
 };

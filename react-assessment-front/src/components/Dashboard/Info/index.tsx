@@ -7,19 +7,15 @@ import MobileList from "./MobileList";
 
 interface InfoType {
   contacts?: Contact[];
-  setRefetchtoggle?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Info: React.FC<InfoType> = ({ contacts, setRefetchtoggle }) => {
+const Info: React.FC<InfoType> = ({ contacts }) => {
   return (
     <Box height="90%" overflowY={["unset", null, null, "auto"]}>
       {contacts ? (
         <>
           <Box display={["none", null, null, "block"]}>
-            <DesktopList
-              setRefetchToggle={setRefetchtoggle}
-              contacts={contacts}
-            />
+            <DesktopList contacts={contacts} />
           </Box>
           <Box display={["block", null, null, "none"]}>
             <MobileList contacts={contacts} />
