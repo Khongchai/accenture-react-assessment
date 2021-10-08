@@ -16,20 +16,20 @@ interface EditableTextProps {
   rejectCondition?: (newData: string) => any;
 
   /*
-   * Text to show when rejected
+   * Action to perform when change is rejected
    */
-  rejectionText?: () => any;
+  rejectionAction?: () => any;
 }
 
 /**
- * Chakra UI provides editable component, but it does not handle the case when user deletes everything and unfocus component
+ * An event-based editable text field.
  */
 //TODO => refactor logic
 const EditableText: React.FC<EditableTextProps> = ({
   defaultText,
   onSave,
   rejectCondition,
-  rejectionText,
+  rejectionAction,
 }) => {
   const [editable, setEditable] = useState(false);
 
@@ -73,6 +73,7 @@ const EditableText: React.FC<EditableTextProps> = ({
   }
 
   function editOffAndRestoreFallback() {
+    rejectionAction && rejectionAction();
     setText(fallbackText);
     setEditable(false);
   }

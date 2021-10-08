@@ -2,6 +2,10 @@ import React from "react";
 import DeleteButton from "../../../../StyledElements/DeleteButton";
 import Contact from "../../../../types/Contact";
 import fetch from "../../../../utils/fetch";
+import {
+  ErrorMessageType,
+  useErrorModalMessageStore,
+} from "../../../GlobalStores/ErrorModalMessage";
 import EditableText from "../../../shared/EditableText";
 
 interface ListForDesktopType {
@@ -28,17 +32,28 @@ const ListForDesktop: React.FC<ListForDesktopType> = ({
     setRefetchToggle((bool) => !bool);
   }
 
+  const { errorMessageProps, setErrorState } = useErrorModalMessageStore(
+    (state) => state
+  );
+
   return (
     <tr>
       <td>{contact.id}</td>
       <td>
         {allowEdit ? (
           <EditableText
-            onSave={(newData: string) =>
-              updateText(contact.id, "name", newData)
-            }
+            onSave={(newData: string) => {
+              updateText(contact.id, "name", newData);
+              setErrorState({ message: "" });
+            }}
             defaultText={contact.name}
             rejectCondition={(newData: string) => !!newData.match(/\d+/g)}
+            rejectionAction={() => {
+              setErrorState({
+                backgroundColor: "danger",
+                message: "This field does not allow numbers",
+              });
+            }}
           />
         ) : (
           contact.name
@@ -47,11 +62,18 @@ const ListForDesktop: React.FC<ListForDesktopType> = ({
       <td>
         {allowEdit ? (
           <EditableText
-            onSave={(newData: string) =>
-              updateText(contact.id, "email", newData)
-            }
+            onSave={(newData: string) => {
+              updateText(contact.id, "email", newData);
+              setErrorState({ ...errorMessageProps, message: "" });
+            }}
             defaultText={contact.email}
             rejectCondition={(newData: string) => !newData.includes("@")}
+            rejectionAction={() => {
+              setErrorState({
+                backgroundColor: "danger",
+                message: "Invalid email",
+              });
+            }}
           />
         ) : (
           <a
@@ -65,11 +87,18 @@ const ListForDesktop: React.FC<ListForDesktopType> = ({
       <td>
         {allowEdit ? (
           <EditableText
-            onSave={(newData: string) =>
-              updateText(contact.id, "phone", newData)
-            }
+            onSave={(newData: string) => {
+              updateText(contact.id, "phone", newData);
+              setErrorState({ ...errorMessageProps, message: "" });
+            }}
             defaultText={contact.phone}
             rejectCondition={(newData: string) => newData[0] === "-"}
+            rejectionAction={() => {
+              setErrorState({
+                backgroundColor: "danger",
+                message: "Phone number cannot be negative",
+              });
+            }}
           />
         ) : (
           contact.phone
