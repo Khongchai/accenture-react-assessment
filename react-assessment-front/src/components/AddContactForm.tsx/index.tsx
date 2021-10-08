@@ -9,22 +9,23 @@ import fetch from "../../utils/fetch";
 import getFieldErrorConditions from "../../utils/getFieldErrorConditions";
 import { InputField } from "./CustomField";
 
-interface indexProps {}
+interface indexProps {
+  setNewlyAddedList: React.Dispatch<React.SetStateAction<Contact[]>>;
+}
 
-const AddContactForm: React.FC<indexProps> = ({}) => {
+const AddContactForm: React.FC<indexProps> = ({ setNewlyAddedList }) => {
   return (
     <Formik
       initialValues={{ name: "", email: "", phone: "" }}
       onSubmit={async (values, { setFieldError, setSubmitting }) => {
-        //prettier-ignore
-
         const errorExist = getError(values, setFieldError);
         if (!errorExist)
           fetch(
             "http://localhost:3000/contacts",
             "POST",
             JSON.stringify(values)
-          ).then(() => {
+          ).then((newlyAddedContact) => {
+            setNewlyAddedList((list) => [...list, newlyAddedContact]);
             setSubmitting(false);
           });
       }}

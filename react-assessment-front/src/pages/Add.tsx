@@ -1,27 +1,19 @@
-import {
-  Box,
-  Button,
-  Flex,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Img,
-  Input,
-} from "@chakra-ui/react";
-import React from "react";
-import { Link } from "react-router-dom";
-import SecondaryBorderStyledButton from "../StyledElements/SecondaryBorderStyledButton";
-import { Formik, Field, Form } from "formik";
-import SecondaryBackgroundStyledButton from "../StyledElements/SecondaryBackgroundStyledButton";
+import { Stack } from "@chakra-ui/react";
+import React, { useState } from "react";
 import AddContactForm from "../components/AddContactForm.tsx";
+import NewlyAddedList from "../components/NewlyAddedList";
+import Contact from "../types/Contact";
 
 interface AddProps {}
 
 const Add: React.FC<AddProps> = ({}) => {
+  const [newlyAddedList, setNewlyAddedList] = useState<Contact[]>([]);
+
   return (
-    <Box padding="2rem" height="100%">
-      <AddContactForm />
-    </Box>
+    <Stack spacing="2rem" padding="2rem" height="100%">
+      <AddContactForm setNewlyAddedList={setNewlyAddedList} />
+      <NewlyAddedList newlyAddedList={newlyAddedList} />
+    </Stack>
   );
 };
 
