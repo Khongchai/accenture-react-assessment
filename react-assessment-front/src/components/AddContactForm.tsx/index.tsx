@@ -1,10 +1,9 @@
 import { ChevronLeftIcon } from "@chakra-ui/icons";
-import { Box, Button, Flex, Img } from "@chakra-ui/react";
+import { Box, Button, Flex, Text, Img } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import React from "react";
 import { Link } from "react-router-dom";
 import SecondaryBackgroundStyledButton from "../../StyledElements/SecondaryBackgroundStyledButton";
-import SecondaryBorderStyledButton from "../../StyledElements/SecondaryBorderStyledButton";
 import Contact from "../../types/Contact";
 import fetch from "../../utils/fetch";
 import getFieldErrorConditions from "../../utils/getFieldErrorConditions";
@@ -53,20 +52,23 @@ const AddContactForm: React.FC<indexProps> = ({ setNewlyAddedList }) => {
                   color="black"
                   backgroundColor="turquoise"
                 >
-                  Back to Homepage
+                  <Text display={["none", null, null, "block"]}>
+                    Back to Homepage
+                  </Text>
                 </Button>
               </Link>
             </Box>
+            <EditModeButton />
             <SecondaryBackgroundStyledButton
               buttonProps={{
                 leftIcon: <Img src="assets/person_add.svg" />,
                 type: "submit",
                 isLoading: isSubmitting,
+                fontSize: "14px",
               }}
             >
-              Add Now
+              Add
             </SecondaryBackgroundStyledButton>
-            <EditModeButton />
           </Flex>
         </Form>
       )}

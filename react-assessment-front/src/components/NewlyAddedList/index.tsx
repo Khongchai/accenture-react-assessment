@@ -2,11 +2,9 @@ import { Box, Divider, Heading } from "@chakra-ui/react";
 import React, { useState } from "react";
 import Contact from "../../types/Contact";
 
-interface indexProps {
-  newlyAddedList: Contact[];
-}
+interface indexProps {}
 
-const NewlyAddedList: React.FC<indexProps> = ({ newlyAddedList }) => {
+const NewlyAddedListTextDivider: React.FC<indexProps> = () => {
   return (
     <Box>
       <Heading as="h2" size="lg">
@@ -17,4 +15,4 @@ const NewlyAddedList: React.FC<indexProps> = ({ newlyAddedList }) => {
   );
 };
 
-export default NewlyAddedList;
+export default NewlyAddedListTextDivider;

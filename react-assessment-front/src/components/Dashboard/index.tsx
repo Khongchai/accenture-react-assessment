@@ -4,6 +4,7 @@ import React, { useRef, useState } from "react";
 import Contact from "../../types/Contact";
 import useDashboardFullLength from "../../utils/ui-utils/useDashboardFullLength";
 import useFetch from "../../utils/useFetch";
+import { useRefetchToggleStore } from "../GlobalStores/RefetchToggleStore";
 import ActionSection from "./ActionSection";
 import EditModeText from "./EditModeText";
 import Info from "./Info";
@@ -13,15 +14,13 @@ const Dashboard: React.FC = () => {
   useDashboardFullLength(bg);
 
   const [contacts, setContacts] = useState<Contact[]>();
+  const refetch = useRefetchToggleStore((state) => state.refetch);
   const [toggleRefetch, setRefetchToggle] = useState(false);
 
   //TODO optional feature, do if time left
   const [page, setPage] = useState(1);
 
-  useFetch(`http://localhost:3000/contacts?_page=${page}`, setContacts, [
-    page,
-    toggleRefetch,
-  ]);
+  useFetch(`http://localhost:3000/contacts`, setContacts, [page, refetch]);
 
   return (
     <Box

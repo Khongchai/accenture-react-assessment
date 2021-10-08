@@ -1,7 +1,7 @@
 import { IconButton } from "@chakra-ui/button";
 import { CloseIcon } from "@chakra-ui/icons";
 import { Box, Text } from "@chakra-ui/layout";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useErrorModalMessageStore } from "../GlobalStores/ErrorModalMessage";
 
 /**
@@ -13,7 +13,12 @@ import { useErrorModalMessageStore } from "../GlobalStores/ErrorModalMessage";
  */
 const ErrorModal: React.FC = () => {
   const {
-    errorMessageProps: { backgroundColor, message, ariaLive, textColor },
+    errorMessageProps: {
+      backgroundColor,
+      message: triggerMessage,
+      ariaLive,
+      textColor,
+    },
     setErrorState,
   } = useErrorModalMessageStore((state) => state);
 
@@ -24,6 +29,8 @@ const ErrorModal: React.FC = () => {
       ariaLive,
       textColor,
     });
+
+  const messageToShow = useGetMessageToShowFromTriggerMessage(triggerMessage);
   return (
     <Box
       backgroundColor={backgroundColor}
@@ -34,28 +41,23 @@ const ErrorModal: React.FC = () => {
       bottom="100px"
       right="50%"
       transform="translateX(50%)"
-      transition="padding .3s"
+      transition=".3s"
       color={textColor}
-      padding={message ? "1.75rem 1.85rem" : "0"}
+      padding={triggerMessage ? "1.75rem 1.85rem" : "0"}
+      fontSize={triggerMessage ? "1rem" : 0}
       borderRadius="5px"
       aria-live={ariaLive}
       fontWeight="bold"
       boxShadow="dark-lg"
     >
-      <Text
-        onChange={() => {
-          console.log("change");
-        }}
-      >
-        {message}
-      </Text>
+      <Text>{messageToShow}</Text>
       <IconButton
         background="transparent"
         position="absolute"
         top="1px"
         right="1px"
-        opacity={message ? 1 : 0}
-        pointerEvents={message ? "auto" : "none"}
+        opacity={triggerMessage ? 1 : 0}
+        pointerEvents={triggerMessage ? "auto" : "none"}
         aria-label="modal close icon"
         _hover={{ opacity: "0.5" }}
         icon={<CloseIcon width="20px" />}
@@ -66,3 +68,17 @@ const ErrorModal: React.FC = () => {
 };
 
 export default ErrorModal;
+
+/**
+ * Trigger message can be empty, while messageToShow will always be visible. Useful for smooth transition in and out.
+ */
+function useGetMessageToShowFromTriggerMessage(triggerMessage?: string) {
+  const [messageToShow, setMessageToShow] = useState(triggerMessage);
+  useEffect(() => {
+    if (triggerMessage) {
+      setMessageToShow(triggerMessage);
+    }
+  }, [triggerMessage]);
+
+  return messageToShow;
+}

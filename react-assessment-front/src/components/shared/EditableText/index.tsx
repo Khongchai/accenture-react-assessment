@@ -49,10 +49,10 @@ const EditableText: React.FC<EditableTextProps> = ({
 
   const inputEvents = {
     onFocus: (e: React.FocusEvent<HTMLInputElement>) => {
-      const compensatePadding = 2;
-      e.target.style.width = e.target.value.length + compensatePadding + "ch";
+      adjustWidthOnChange(e.target);
     },
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+      adjustWidthOnChange(e.target);
       setText(e.target.value);
     },
     onBlur: (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,6 +63,11 @@ const EditableText: React.FC<EditableTextProps> = ({
       }
     },
   };
+
+  function adjustWidthOnChange(element: HTMLInputElement) {
+    const compensatePadding = 2.5;
+    element.style.width = element.value.length + compensatePadding + "ch";
+  }
 
   function editOffAndSave(newData: string) {
     if (rejectCondition) {

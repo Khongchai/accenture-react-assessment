@@ -17,6 +17,7 @@ const EditModeButton: React.FC<EditModeButtonProps> = ({}) => {
       buttonProps={{
         leftIcon: <Img src="assets/ic_edit.svg" />,
         onClick: editOnClick,
+        fontSize: "14px",
       }}
     >
       {editMode ? (

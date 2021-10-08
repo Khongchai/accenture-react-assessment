@@ -1,12 +1,12 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
 import Contact from "../../../types/Contact";
-import ListForDesktop from "./Lists/Desktop";
+import ListForDesktop from "./Row/Desktop";
 import "./desktopList.css";
 
 interface DesktopListType {
   contacts: Contact[];
-  setRefetchToggle: React.Dispatch<React.SetStateAction<boolean>>;
+  setRefetchToggle?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const DesktopList: React.FC<DesktopListType> = ({

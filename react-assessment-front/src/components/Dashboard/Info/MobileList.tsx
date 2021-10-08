@@ -1,7 +1,7 @@
-import { Box, Stack } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 import React from "react";
 import Contact from "../../../types/Contact";
-import Mobile from "./Lists/Mobile";
+import Mobile from "./Row/Mobile";
 
 const MobileList: React.FC<{ contacts: Contact[] }> = ({ contacts }) => {
   return (

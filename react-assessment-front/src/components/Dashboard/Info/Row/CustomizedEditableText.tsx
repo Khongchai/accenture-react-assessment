@@ -9,7 +9,7 @@ interface CustomizedEditableTextProps {
   fieldName: string;
   fieldValue: string;
   fieldId: number;
-  setRefetchToggle: React.Dispatch<React.SetStateAction<boolean>>;
+  setRefetchToggle?: React.Dispatch<React.SetStateAction<boolean>>;
   error: {
     condition: (newData: string) => any;
     message: string;
@@ -34,7 +34,7 @@ const CustomizedEditableText: React.FC<CustomizedEditableTextProps> = ({
       JSON.stringify(body)
     );
 
-    setRefetchToggle((state) => !state);
+    setRefetchToggle && setRefetchToggle((state) => !state);
   }
 
   const allowEdit = useEditModeToggleStore((state) => state.mode);

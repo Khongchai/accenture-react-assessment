@@ -2,10 +2,13 @@ import { Text } from "@chakra-ui/react";
 import React from "react";
 import { useEditModeToggleStore } from "../GlobalStores/EditModeToggleStore";
 
-const EditMode: React.FC<{}> = () => {
+const EditMode: React.FC<{
+  props?: any;
+}> = ({ props }) => {
   const editMode = useEditModeToggleStore((state) => state.mode);
   return (
     <Text
+      {...props}
       aria-live="assertive"
       textAlign="center"
       fontSize="20px"

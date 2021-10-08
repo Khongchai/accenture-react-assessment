@@ -7,7 +7,7 @@ import MobileList from "./MobileList";
 
 interface InfoType {
   contacts?: Contact[];
-  setRefetchtoggle: React.Dispatch<React.SetStateAction<boolean>>;
+  setRefetchtoggle?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Info: React.FC<InfoType> = ({ contacts, setRefetchtoggle }) => {

@@ -7,7 +7,7 @@ import CustomizedEditableText from "./CustomizedEditableText";
 
 interface ListForDesktopType {
   contact: Contact;
-  setRefetchToggle: React.Dispatch<React.SetStateAction<boolean>>;
+  setRefetchToggle?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ListForDesktop: React.FC<ListForDesktopType> = ({
@@ -45,16 +45,18 @@ const ListForDesktop: React.FC<ListForDesktopType> = ({
         />
       </td>
       <td style={{ textAlign: "right" }}>
-        <DeleteButton
-          action={async () => {
-            return fetch(
-              `http://localhost:3000/contacts/${contact.id}`,
-              "DELETE"
-            ).then(() => {
-              setRefetchToggle((state) => !state);
-            });
-          }}
-        />
+        {setRefetchToggle ? (
+          <DeleteButton
+            action={async () => {
+              return fetch(
+                `http://localhost:3000/contacts/${contact.id}`,
+                "DELETE"
+              ).then(() => {
+                setRefetchToggle && setRefetchToggle((state) => !state);
+              });
+            }}
+          />
+        ) : null}
       </td>
     </tr>
   );
