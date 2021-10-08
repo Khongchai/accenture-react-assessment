@@ -1,4 +1,5 @@
-import { Flex, Img } from "@chakra-ui/react";
+import { ChevronLeftIcon } from "@chakra-ui/icons";
+import { Box, Button, Flex, Img } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -7,6 +8,7 @@ import SecondaryBorderStyledButton from "../../StyledElements/SecondaryBorderSty
 import Contact from "../../types/Contact";
 import fetch from "../../utils/fetch";
 import getFieldErrorConditions from "../../utils/getFieldErrorConditions";
+import EditModeButton from "../shared/EditModeButton";
 import { InputField } from "./CustomField";
 
 interface indexProps {
@@ -37,7 +39,24 @@ const AddContactForm: React.FC<indexProps> = ({ setNewlyAddedList }) => {
             <InputField label="email" name="email" type="email" />
             <InputField label="phone" name="phone" type="number" />
           </Flex>
-          <Flex css={{ gap: "1rem", marginTop: "2rem" }}>
+          <Flex
+            css={{
+              gap: "1rem",
+              marginTop: "2rem",
+              justifyContent: "flex-end",
+            }}
+          >
+            <Box marginRight="auto">
+              <Link to={""}>
+                <Button
+                  leftIcon={<ChevronLeftIcon />}
+                  color="black"
+                  backgroundColor="turquoise"
+                >
+                  Back to Homepage
+                </Button>
+              </Link>
+            </Box>
             <SecondaryBackgroundStyledButton
               buttonProps={{
                 leftIcon: <Img src="assets/person_add.svg" />,
@@ -47,11 +66,7 @@ const AddContactForm: React.FC<indexProps> = ({ setNewlyAddedList }) => {
             >
               Add Now
             </SecondaryBackgroundStyledButton>
-            <Link to={""}>
-              <SecondaryBorderStyledButton>
-                Back to Homepage
-              </SecondaryBorderStyledButton>
-            </Link>
+            <EditModeButton />
           </Flex>
         </Form>
       )}

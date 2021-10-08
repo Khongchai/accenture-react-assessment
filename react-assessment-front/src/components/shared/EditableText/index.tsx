@@ -33,20 +33,24 @@ const EditableText: React.FC<EditableTextProps> = ({
 }) => {
   const [editable, setEditable] = useState(false);
 
-  //Fallback text is the version before an edit is made.
-  const [fallbackText, setFallbackText] = useState("");
+  /**
+   * Savedtext act as a fallback text when error occurs and the actual
+   * text user sees. This prevents CLS when the user edits the text
+   */
+  const [savedText, setSavedText] = useState(defaultText);
   const [text, setText] = useState(defaultText);
 
   const textEvents = {
     onClick: (e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
-      setFallbackText((e.target as HTMLElement).innerHTML);
+      setSavedText((e.target as HTMLElement).innerHTML);
       setEditable(true);
     },
   };
 
   const inputEvents = {
     onFocus: (e: React.FocusEvent<HTMLInputElement>) => {
-      e.target.style.width = e.target.value.length + "ch";
+      const compensatePadding = 2;
+      e.target.style.width = e.target.value.length + compensatePadding + "ch";
     },
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
       setText(e.target.value);
@@ -69,32 +73,41 @@ const EditableText: React.FC<EditableTextProps> = ({
       }
     }
     onSave && onSave(newData);
+    setSavedText(newData);
     setEditable(false);
   }
 
   function editOffAndRestoreFallback() {
     rejectionAction && rejectionAction(text);
-    setText(fallbackText);
+    setText(savedText);
     setEditable(false);
   }
   return (
     <Box width="fit-content" pos="relative">
       {editable ? (
         <Input
-          padding="0.5"
+          padding="0.5rem"
           width="fit-content"
           autoFocus
           value={text}
           {...inputEvents}
           //prevent vertical cls
           pos="absolute"
-          transform="translateY(-50%)"
+          transform="translateY(-0.5rem)"
         />
-      ) : (
-        <Text {...textEvents} cursor="pointer">
-          {text}
-        </Text>
-      )}
+      ) : null}
+      {/* placeholder text to keep the space */}
+      <Text
+        display={editable ? "none" : "auto"}
+        pos="absolute"
+        {...textEvents}
+        cursor="pointer"
+      >
+        {savedText}
+      </Text>
+      <Text opacity="0" pointerEvents="none">
+        {savedText}
+      </Text>
     </Box>
   );
 };

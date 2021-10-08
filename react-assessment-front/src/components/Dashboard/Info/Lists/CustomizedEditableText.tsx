@@ -20,7 +20,7 @@ const CustomizedEditableText: React.FC<CustomizedEditableTextProps> = ({
   fieldName,
   fieldValue,
   fieldId,
-  setRefetchToggle: refetch,
+  setRefetchToggle,
   error,
 }) => {
   const { setErrorState } = useErrorModalMessageStore((state) => state);
@@ -34,7 +34,7 @@ const CustomizedEditableText: React.FC<CustomizedEditableTextProps> = ({
       JSON.stringify(body)
     );
 
-    refetch((bool) => !bool);
+    setRefetchToggle((state) => !state);
   }
 
   const allowEdit = useEditModeToggleStore((state) => state.mode);

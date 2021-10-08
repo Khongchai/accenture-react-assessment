@@ -10,17 +10,14 @@ interface InfoType {
   setRefetchtoggle: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Info: React.FC<InfoType> = ({
-  contacts,
-  setRefetchtoggle: setRefetchToggle,
-}) => {
+const Info: React.FC<InfoType> = ({ contacts, setRefetchtoggle }) => {
   return (
     <Box height="90%" overflowY={["unset", null, null, "auto"]}>
       {contacts ? (
         <>
           <Box display={["none", null, null, "block"]}>
             <DesktopList
-              setRefetchToggle={setRefetchToggle}
+              setRefetchToggle={setRefetchtoggle}
               contacts={contacts}
             />
           </Box>

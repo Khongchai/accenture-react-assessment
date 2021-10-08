@@ -10,9 +10,13 @@ const EditMode: React.FC<{}> = () => {
       textAlign="center"
       fontSize="20px"
       color="danger"
+      height={editMode ? "20px" : 0}
+      opacity={editMode ? "1" : 0}
+      transition=".3s"
       fontWeight="bold"
+      pointerEvents="none"
     >
-      {editMode ? "Edit mode is now on, select any field to edit" : ""}
+      Edit mode is now on, select any field to edit
     </Text>
   );
 };

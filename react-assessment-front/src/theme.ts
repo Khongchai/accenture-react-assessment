@@ -10,6 +10,7 @@ const theme = extendTheme({
     secondary: "#3A82F3",
     danger: "#FA5959",
     lightBlue: "#F2F7FF",
+    turquoise: "#5CE8DC",
   },
   components: {
     Heading: {

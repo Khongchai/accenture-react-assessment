@@ -34,9 +34,10 @@ const Dashboard: React.FC = () => {
       height="100%"
     >
       <ActionSection />
-      <Divider marginTop="2rem" marginBottom="2rem" type="blue" />
-      <EditModeText />
-
+      <Divider margin="1.25rem 0" type="blue" />
+      <Box margin="1.25rem 0">
+        <EditModeText />
+      </Box>
       <Info contacts={contacts} setRefetchtoggle={setRefetchToggle} />
     </Box>
   );
