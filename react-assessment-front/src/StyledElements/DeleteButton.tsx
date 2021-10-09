@@ -13,6 +13,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ id }) => {
   const { toggle: toggleRefetch } = useRefetchToggleStore((state) => state);
 
   const buttonOnClick = async () => {
+    console.log("askdj");
     setIsLoading(true);
     fetch(`${serverUrl}/contacts/${id}`, "DELETE")
       .then(() => {
@@ -31,10 +32,9 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ id }) => {
       iconSpacing={["0", null, null, null, "auto"]}
       leftIcon={<Img src="assets/trash.svg" />}
       _hover={{ opacity: 0.8 }}
+      padding="1rem"
       isLoading={isLoading}
-    >
-      <Text display={["none", null, null, null, "block"]}>Delete</Text>
-    </Button>
+    />
   );
 };
 

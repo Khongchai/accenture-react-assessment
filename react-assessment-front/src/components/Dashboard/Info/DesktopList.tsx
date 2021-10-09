@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
 import Contact from "../../../types/Contact";
-import ListForDesktop from "./Row/Desktop";
+import DesktopRow from "./Row/Desktop";
 import "./desktopList.css";
 
 interface DesktopListType {
@@ -29,7 +29,7 @@ const DesktopList: React.FC<DesktopListType> = ({ contacts }) => {
         </thead>
         <tbody id="table-list">
           {contacts.map((contact) => (
-            <ListForDesktop key={contact.id} contact={contact} />
+            <DesktopRow key={contact.id} contact={contact} />
           ))}
         </tbody>
       </table>

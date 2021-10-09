@@ -4,6 +4,7 @@ import Contact from "../../../types/Contact";
 import LoadingIcon from "../../shared/LoadingIcon";
 import DesktopList from "./DesktopList";
 import MobileList from "./MobileList";
+import "./styles.css";
 
 interface InfoType {
   contacts?: Contact[];
@@ -11,7 +12,11 @@ interface InfoType {
 
 const Info: React.FC<InfoType> = ({ contacts }) => {
   return (
-    <Box height="90%" overflowY={["unset", null, null, "auto"]}>
+    <Box
+      height="83%"
+      className="custom-scrollbar"
+      overflowY={["unset", null, null, "auto"]}
+    >
       {contacts ? (
         <>
           <Box display={["none", null, null, "block"]}>

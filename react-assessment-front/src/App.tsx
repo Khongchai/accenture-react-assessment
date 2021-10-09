@@ -9,6 +9,7 @@ import ErrorModal from "./components/shared/ErrorModal";
 import Add from "./pages/Add";
 import HeaderWithLogo from "./components/shared/HeaderWithLogo";
 import MainWrapper from "./components/shared/MainWrapper";
+import "./fonts/style.css";
 
 /**
  * Entry point

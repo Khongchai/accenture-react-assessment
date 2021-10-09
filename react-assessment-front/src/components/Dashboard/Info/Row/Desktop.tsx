@@ -8,7 +8,7 @@ interface ListForDesktopType {
   contact: Contact;
 }
 
-const ListForDesktop: React.FC<ListForDesktopType> = ({ contact }) => {
+const DesktopRow: React.FC<ListForDesktopType> = ({ contact }) => {
   return (
     <tr>
       <td>{contact.id}</td>
@@ -43,4 +43,4 @@ const ListForDesktop: React.FC<ListForDesktopType> = ({ contact }) => {
   );
 };
 
-export default ListForDesktop;
+export default DesktopRow;

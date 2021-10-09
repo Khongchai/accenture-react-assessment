@@ -56,6 +56,12 @@ const EditableText: React.FC<EditableTextProps> = ({
       setText(e.target.value);
     },
     onBlur: (e: React.ChangeEvent<HTMLInputElement>) => {
+      const noChange = e.target.value === savedText;
+      if (noChange) {
+        setEditable(false);
+        return;
+      }
+
       if (!e.target.value.length) {
         editOffAndRestoreFallback();
       } else {

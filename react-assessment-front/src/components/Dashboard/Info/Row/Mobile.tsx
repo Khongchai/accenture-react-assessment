@@ -9,7 +9,7 @@ interface MobileProps {
   contact: Contact;
 }
 
-const Mobile: React.FC<MobileProps> = ({ contact }) => {
+const MobileRow: React.FC<MobileProps> = ({ contact }) => {
   return (
     <Flex fontSize="15px">
       <Text flex="0.1" marginRight="1rem">
@@ -50,4 +50,4 @@ const Mobile: React.FC<MobileProps> = ({ contact }) => {
   );
 };
 
-export default Mobile;
+export default MobileRow;
