@@ -1,9 +1,8 @@
-export default function (
+export default function customFetch(
   url: string,
   method: "POST" | "PUT" | "DELETE" | "PATCH",
   body?: string
 ) {
-  console.log(url);
   return fetch(url, {
     method,
     body: body ? body : "",

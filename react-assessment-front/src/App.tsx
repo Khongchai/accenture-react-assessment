@@ -1,15 +1,14 @@
 import { Box, ChakraProvider } from "@chakra-ui/react";
 import React from "react";
-import theme from "./theme";
-import Landing from "./pages/Landing";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import PageNotFound from "./pages/404";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import BackgroundDecor from "./components/shared/BackgroundDecor";
 import ErrorModal from "./components/shared/ErrorModal";
-import Add from "./pages/Add";
-import HeaderWithLogo from "./components/shared/HeaderWithLogo";
 import MainWrapper from "./components/shared/MainWrapper";
 import "./fonts/style.css";
+import PageNotFound from "./pages/404";
+import Add from "./pages/Add";
+import Landing from "./pages/Landing";
+import theme from "./theme";
 
 /**
  * Entry point

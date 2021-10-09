@@ -1,4 +1,3 @@
-import { anatomy } from "@chakra-ui/theme-tools";
 import React from "react";
 import { serverUrl } from "../const/server";
 

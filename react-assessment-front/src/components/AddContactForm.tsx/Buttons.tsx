@@ -1,6 +1,6 @@
 import { ChevronLeftIcon } from "@chakra-ui/icons";
-import { Flex, Box } from "@chakra-ui/layout";
-import { Button, Img, Text } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/layout";
+import { Img, Text } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
 import SecondaryBackgroundStyledButton from "../../StyledElements/SecondaryBackgroundStyledButton";

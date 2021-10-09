@@ -1,6 +1,6 @@
 import { DeleteIcon } from "@chakra-ui/icons";
-import { Box, Button, Img } from "@chakra-ui/react";
-import React, { useMemo, useState } from "react";
+import { Box, Button } from "@chakra-ui/react";
+import React, { useState } from "react";
 import { useRefetchToggleStore } from "../components/GlobalStores/RefetchToggleStore";
 import { serverUrl } from "../const/server";
 import fetch from "../utils/fetch";

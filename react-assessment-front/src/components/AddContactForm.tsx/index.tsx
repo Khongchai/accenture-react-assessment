@@ -1,5 +1,4 @@
-import { ChevronLeftIcon } from "@chakra-ui/icons";
-import { Box, Button, Flex, Text, Img } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import React from "react";
 import { serverUrl } from "../../const/server";

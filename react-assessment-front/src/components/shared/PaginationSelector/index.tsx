@@ -1,5 +1,5 @@
-import { Box, Flex } from "@chakra-ui/react";
-import React, { useEffect, useMemo } from "react";
+import { Flex } from "@chakra-ui/react";
+import React, { useMemo } from "react";
 import PageNum from "./PageNum";
 
 interface PaginationSelectorProps {
