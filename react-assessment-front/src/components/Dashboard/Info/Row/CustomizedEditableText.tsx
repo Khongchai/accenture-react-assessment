@@ -12,7 +12,7 @@ interface CustomizedEditableTextProps {
   fieldValue: string;
   fieldId: number;
   error: {
-    condition: (newData: string) => any;
+    condition: (newData: string) => boolean;
     message: string;
   };
 }
@@ -43,6 +43,7 @@ const CustomizedEditableText: React.FC<CustomizedEditableTextProps> = ({
       onSave={(newData: string) => {
         updateText(fieldId, fieldName, newData);
         setErrorState({ message: "" });
+        return true;
       }}
       defaultText={fieldValue}
       rejectCondition={(newData: string) => error.condition(newData)}
@@ -57,6 +58,8 @@ const CustomizedEditableText: React.FC<CustomizedEditableTextProps> = ({
               backgroundColor: "secondary",
               message: "Fields do not allow empty spaces",
             });
+
+        return true;
       }}
     />
   ) : fieldName === "email" ? (

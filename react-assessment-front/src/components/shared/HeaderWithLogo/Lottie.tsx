@@ -5,7 +5,7 @@ import lottieAnimationData from "./lottie-logo-anim.json";
 
 const LottieLogo: React.FC = ({}) => {
   return (
-    <Box width="150px" height="150px">
+    <Box width="150px" pointerEvents="none" height="150px">
       <Lottie
         options={{
           autoplay: true,

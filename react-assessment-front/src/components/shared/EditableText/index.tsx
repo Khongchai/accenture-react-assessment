@@ -2,23 +2,26 @@ import { Input } from "@chakra-ui/input";
 import { Box, Text } from "@chakra-ui/layout";
 import React, { useState } from "react";
 
+/**
+ * All arguments must return true for chaining purposes
+ */
 interface EditableTextProps {
   defaultText: string;
 
   /*
    * Event to trigger when text is successfully saved
    */
-  onSave?: (newData: string) => any;
+  onSave: (newData: string) => boolean;
 
   /*
    * On what condition will change be rejected
    */
-  rejectCondition?: (newData: string) => any;
+  rejectCondition: (newData: string) => boolean;
 
   /*
    * Action to perform when change is rejected
    */
-  rejectionAction?: (rejectedValue: string) => any;
+  rejectionAction: (rejectedValue: string) => boolean;
 }
 
 /**
@@ -34,16 +37,17 @@ const EditableText: React.FC<EditableTextProps> = ({
   const [editable, setEditable] = useState(false);
 
   /**
-   * Savedtext act as a fallback text when error occurs and the actual
+   * The visible text acts as a fallback text when error occurs and the actual
    * text user sees. This prevents CLS when the user edits the text
+   * 
+   * Lead text leads the change, once the change checks out, lead text passes the change on to visibleText
    */
-  const [savedText, setSavedText] = useState(defaultText);
-  const [text, setText] = useState(defaultText);
+  const [visibleFallback, setVisibleFallback] = useState(defaultText);
+  const [leadText, setLeadText] = useState(defaultText);
 
   const textEvents = {
     onClick: (e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
-      setSavedText((e.target as HTMLElement).innerHTML);
-      setEditable(true);
+      makeTextVisible((e as any).target.innerHTML) && editOn();
     },
   };
 
@@ -53,46 +57,28 @@ const EditableText: React.FC<EditableTextProps> = ({
     },
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
       adjustWidthOnChange(e.target);
-      setText(e.target.value);
+      setLeadText(e.target.value);
     },
     onBlur: (e: React.ChangeEvent<HTMLInputElement>) => {
-      const noChange = e.target.value === savedText;
-      if (noChange) {
-        setEditable(false);
-        return;
-      }
-
-      if (!e.target.value.length) {
-        editOffAndRestoreFallback();
-      } else {
-        editOffAndSave(e.target.value);
-      }
-    },
+      noChange(e.target.value, visibleFallback)
+        ? editOff()
+          : isEmtpyString(e.target.value) 
+            ? performRejection(e.target.value) &&  editOff() && setLeadText(visibleFallback)
+              : noErrors(e.target.value) 
+                ? editOffAndSave(e.target.value) 
+                  : editOff() && performRejection(e.target.value) && setLeadText(visibleFallback)},
   };
 
-  function adjustWidthOnChange(element: HTMLInputElement) {
-    const compensatePadding = 2.5;
-    element.style.width = element.value.length + compensatePadding + "ch";
-  }
-
-  function editOffAndSave(newData: string) {
-    if (rejectCondition) {
-      const reject = rejectCondition(newData);
-      if (reject) {
-        editOffAndRestoreFallback();
-        return;
-      }
-    }
-    onSave && onSave(newData);
-    setSavedText(newData);
-    setEditable(false);
-  }
-
-  function editOffAndRestoreFallback() {
-    rejectionAction && rejectionAction(text);
-    setText(savedText);
-    setEditable(false);
-  }
+  const isEmtpyString = (text: string) => !text.length;
+  const noChange = (text1: string, text2: string) => text1 === text2;
+  const editOffAndSave = (newText: string) =>  performSave(newText) && makeTextVisible(newText) && editOff() && true
+  const adjustWidthOnChange = (elem: HTMLInputElement) => {elem.style.width = elem.value.length + 2.5 + "ch"; return true};
+  const noErrors = (newData: string) => !rejectCondition(newData);
+  const performSave = (dataToSave: string) => onSave(dataToSave);
+  const makeTextVisible = (text: string) => {setVisibleFallback(text); return true};
+  const performRejection  =(rejectedText: string) =>  rejectionAction(rejectedText);
+  const editOff = () => {setEditable(false); return true};
+  const editOn = () => {setEditable(true); return true};
 
   return (
     <Box width="fit-content" pos="relative">
@@ -101,7 +87,7 @@ const EditableText: React.FC<EditableTextProps> = ({
           padding="0.5rem"
           width="fit-content"
           autoFocus
-          value={text}
+          value={leadText}
           {...inputEvents}
           //prevent vertical cls
           pos="absolute"
@@ -115,10 +101,10 @@ const EditableText: React.FC<EditableTextProps> = ({
         {...textEvents}
         cursor="pointer"
       >
-        {savedText}
+        {visibleFallback}
       </Text>
       <Text opacity="0" pointerEvents="none">
-        {savedText}
+        {visibleFallback}
       </Text>
     </Box>
   );
