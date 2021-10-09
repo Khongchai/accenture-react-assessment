@@ -2,6 +2,8 @@ import { Box, Flex, Stack, Text } from "@chakra-ui/react";
 import React from "react";
 import DeleteButton from "../../../../StyledElements/DeleteButton";
 import Contact from "../../../../types/Contact";
+import getFieldErrorConditions from "../../../../utils/getFieldErrorConditions";
+import CustomizedEditableText from "./CustomizedEditableText";
 
 interface MobileProps {
   contact: Contact;
@@ -14,17 +16,35 @@ const Mobile: React.FC<MobileProps> = ({ contact }) => {
         {contact.id}
       </Text>
       <Stack spacing="0.75rem" flex="auto">
-        <Text mb="0.5rem">{contact.name}</Text>
-        <Text>
-          <b style={{ marginRight: "1rem" }}>Email:</b> {contact.email}
-        </Text>
-        <Text>
+        <Box>
+          <CustomizedEditableText
+            fieldId={contact.id}
+            fieldName={"name"}
+            fieldValue={contact.name}
+            error={getFieldErrorConditions("name")}
+          />
+        </Box>
+        <Flex>
+          <b style={{ marginRight: "1rem" }}>Email:</b>{" "}
+          <CustomizedEditableText
+            fieldId={contact.id}
+            fieldName={"email"}
+            fieldValue={contact.email}
+            error={getFieldErrorConditions("email")}
+          />
+        </Flex>
+        <Flex>
           <b style={{ marginRight: "1rem" }}>Phone:</b>
-          {contact.phone}
-        </Text>
+          <CustomizedEditableText
+            fieldId={contact.id}
+            fieldName={"phone"}
+            fieldValue={contact.phone}
+            error={getFieldErrorConditions("phone")}
+          />
+        </Flex>
       </Stack>
       <Box>
-        <DeleteButton />
+        <DeleteButton id={contact.id} />
       </Box>
     </Flex>
   );

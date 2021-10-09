@@ -1,17 +1,13 @@
 import { Box, Stack } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import AddContactForm from "../components/AddContactForm.tsx";
 import EditModeText from "../components/Dashboard/EditModeText";
 import Info from "../components/Dashboard/Info";
 import { useRefetchToggleStore } from "../components/GlobalStores/RefetchToggleStore";
 import NewlyAddedListTextDivider from "../components/NewlyAddedList";
-import { serverUrl } from "../const/server";
-import Contact from "../types/Contact";
-import useFetch from "../utils/useFetch";
 import useFetchFromLastPosition from "../utils/useFetchFromLastPosition";
 
 const Add: React.FC = ({}) => {
-  //TODO => not sure about these guys yet
   const { refetch } = useRefetchToggleStore((state) => state);
   const contactsFromLast = useFetchFromLastPosition([refetch]);
 

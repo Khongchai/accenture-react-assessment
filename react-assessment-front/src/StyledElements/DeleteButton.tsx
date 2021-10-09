@@ -1,20 +1,28 @@
 import { Button, Img, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { useRefetchToggleStore } from "../components/GlobalStores/RefetchToggleStore";
+import { serverUrl } from "../const/server";
+import fetch from "../utils/fetch";
 
 interface DeleteButtonProps {
-  action?: () => Promise<any>;
+  id: number;
 }
 
-const DeleteButton: React.FC<DeleteButtonProps> = ({ action }) => {
+const DeleteButton: React.FC<DeleteButtonProps> = ({ id }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const { toggle: toggleRefetch } = useRefetchToggleStore((state) => state);
+
   const buttonOnClick = async () => {
-    if (action) {
-      setIsLoading(true);
-      action().then(() => {
+    setIsLoading(true);
+    fetch(`${serverUrl}/contacts/${id}`, "DELETE")
+      .then(() => {
+        toggleRefetch();
+      })
+      .then(() => {
         setIsLoading(false);
       });
-    }
   };
+
   return (
     <Button
       onClick={buttonOnClick}
