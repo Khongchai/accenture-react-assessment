@@ -1,4 +1,5 @@
 import React from "react";
+import { serverUrl } from "../../../../const/server";
 import DeleteButton from "../../../../StyledElements/DeleteButton";
 import Contact from "../../../../types/Contact";
 import fetch from "../../../../utils/fetch";
@@ -42,12 +43,11 @@ const ListForDesktop: React.FC<ListForDesktopType> = ({ contact }) => {
       <td style={{ textAlign: "right" }}>
         <DeleteButton
           action={async () => {
-            return fetch(
-              `http://localhost:3000/contacts/${contact.id}`,
-              "DELETE"
-            ).then(() => {
-              toggleRefetch();
-            });
+            return fetch(`${serverUrl}/contacts/${contact.id}`, "DELETE").then(
+              () => {
+                toggleRefetch();
+              }
+            );
           }}
         />
       </td>

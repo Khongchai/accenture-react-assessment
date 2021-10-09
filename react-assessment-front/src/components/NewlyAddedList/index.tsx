@@ -1,6 +1,5 @@
 import { Box, Divider, Heading } from "@chakra-ui/react";
-import React, { useState } from "react";
-import Contact from "../../types/Contact";
+import React from "react";
 
 interface indexProps {}
 

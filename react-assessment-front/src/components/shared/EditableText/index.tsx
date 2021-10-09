@@ -87,6 +87,7 @@ const EditableText: React.FC<EditableTextProps> = ({
     setText(savedText);
     setEditable(false);
   }
+
   return (
     <Box width="fit-content" pos="relative">
       {editable ? (

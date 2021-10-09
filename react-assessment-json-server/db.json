@@ -1,13 +1,7 @@
 {
   "contacts": [
     {
-      "name": "laskdjlksjf",
-      "email": "lskjfs@slkjflsk.com",
-      "phone": "203948230",
-      "id": 23
-    },
-    {
-      "name": "New guy",
+      "name": "New guyss",
       "email": "Newguy@hotmail.com",
       "phone": 209428304,
       "id": 25
@@ -23,6 +17,18 @@
       "email": "Natawan1539@gmail.com",
       "phone": 917905556,
       "id": 27
+    },
+    {
+      "name": "Khong",
+      "email": "KHon@email.com",
+      "phone": 2123423444,
+      "id": 28
+    },
+    {
+      "name": "lkasdflk",
+      "email": "lskdjf@lskjdfsldkf.com",
+      "phone": 20938202394,
+      "id": 29
     }
   ]
 }

@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useEffect } from "react";
 
-export default function useFetchOnStartAndPageChange(
+export default function useFetch(
   url: string,
   setState: Dispatch<SetStateAction<any>>,
   dependencies = [] as any[]

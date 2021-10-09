@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/layout";
 import { Divider } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
+import { serverUrl } from "../../const/server";
 import Contact from "../../types/Contact";
 import useDashboardFullLength from "../../utils/ui-utils/useDashboardFullLength";
 import useFetch from "../../utils/useFetch";
@@ -19,7 +20,7 @@ const Dashboard: React.FC = () => {
   //TODO optional feature, do if time left
   const [page, setPage] = useState(1);
 
-  useFetch(`http://localhost:3000/contacts`, setContacts, [page, refetch]);
+  useFetch(`${serverUrl}/contacts`, setContacts, [page, refetch]);
 
   return (
     <Box

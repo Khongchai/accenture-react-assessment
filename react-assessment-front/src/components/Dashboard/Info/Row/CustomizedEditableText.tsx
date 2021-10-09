@@ -5,6 +5,7 @@ import EditableText from "../../../shared/EditableText";
 import fetch from "../../../../utils/fetch";
 import { useEditModeToggleStore } from "../../../GlobalStores/EditModeToggleStore";
 import { useRefetchToggleStore } from "../../../GlobalStores/RefetchToggleStore";
+import { serverUrl } from "../../../../const/server";
 
 interface CustomizedEditableTextProps {
   fieldName: string;
@@ -30,11 +31,7 @@ const CustomizedEditableText: React.FC<CustomizedEditableTextProps> = ({
     const body: any = {};
     body[fieldName] = newData;
 
-    fetch(
-      `http://localhost:3000/contacts/${id}`,
-      "PATCH",
-      JSON.stringify(body)
-    );
+    fetch(`${serverUrl}/contacts/${id}`, "PATCH", JSON.stringify(body));
 
     toggleRefetch();
   }

@@ -29,7 +29,7 @@ const DesktopList: React.FC<DesktopListType> = ({ contacts }) => {
         </thead>
         <tbody id="table-list">
           {contacts.map((contact) => (
-            <ListForDesktop key={contact.email} contact={contact} />
+            <ListForDesktop key={contact.id} contact={contact} />
           ))}
         </tbody>
       </table>
