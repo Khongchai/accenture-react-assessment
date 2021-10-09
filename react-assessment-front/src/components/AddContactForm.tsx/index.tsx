@@ -18,7 +18,7 @@ const AddContactForm: React.FC = () => {
         const errorExist = getError(values, setFieldError);
         if (!errorExist)
           fetch(serverUrl + "/contacts", "POST", JSON.stringify(values)).then(
-            (newlyAddedContact) => {
+            () => {
               toggleRefetch();
               setSubmitting(false);
             }
