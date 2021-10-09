@@ -40,7 +40,10 @@ const Dashboard: React.FC = () => {
       width="100%"
       height="100%"
     >
-      <ActionSection setFetchUrl={setFetchUrl} />
+      <ActionSection
+        resetPagination={() => setPage(1)}
+        setFetchUrl={setFetchUrl}
+      />
       <Divider margin="1.25rem 0" type="blue" />
       <Box margin="1.25rem 0">
         <EditModeText />

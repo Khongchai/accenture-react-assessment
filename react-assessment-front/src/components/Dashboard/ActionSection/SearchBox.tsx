@@ -5,11 +5,15 @@ import handleSearchInputChange from "../../../utils/useHandleInputChange";
 
 export default function SearchBox({
   setFetchUrl,
+  resetPagination,
 }: {
   setFetchUrl: React.Dispatch<React.SetStateAction<string>>;
+  resetPagination: () => any;
 }) {
-  const inputOnChange = (e: any) =>
+  const inputOnChange = (e: any) => {
     handleSearchInputChange(e.target.value, setFetchUrl);
+    resetPagination();
+  };
   return (
     <InputGroup width={["100%", null, null, "340px"]}>
       <Input
