@@ -30,7 +30,8 @@ const AddContactForm: React.FC = () => {
           <Flex css={{ gap: "1rem" }} flexDir={["column", null, null, "row"]}>
             <InputField label="name" name="name" type="text" />
             <InputField label="email" name="email" type="email" />
-            <InputField label="phone" name="phone" type="number" />
+            {/* type text because number will throw away the first zero */}
+            <InputField label="phone" name="phone" type="text" />
           </Flex>
           <Buttons isSubmitting={isSubmitting} />
         </Form>
