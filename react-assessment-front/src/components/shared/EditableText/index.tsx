@@ -1,6 +1,8 @@
 import { Input } from "@chakra-ui/input";
 import { Box, Text } from "@chakra-ui/layout";
 import React, { useState } from "react";
+import ConditionalInput from "./ConditionalInput";
+import PlaceHolderText from "./PlaceHolderText";
 
 //!DO NOT USE PRETTIER WITH THIS FILE; EVERYTHING WILL GET REALLY MESSY
 
@@ -83,27 +85,8 @@ const EditableText: React.FC<EditableTextProps> = ({
 
   return (
     <Box width="fit-content" pos="relative">
-      {editable ? (
-        <Input
-          padding="0.5rem"
-          width="fit-content"
-          autoFocus
-          value={leadText}
-          {...inputEvents}
-          //prevent vertical cls
-          pos="absolute"
-          transform="translateY(-0.5rem)"
-        />
-      ) : null}
-      {/* placeholder text to keep the space */}
-      <Text
-        display={editable ? "none" : "auto"}
-        pos="absolute"
-        {...textEvents}
-        cursor="pointer"
-      >
-        {visibleFallback}
-      </Text>
+      <ConditionalInput inputEvents={inputEvents} on={editable} inputValue={leadText}/>
+      <PlaceHolderText editable={editable} text={visibleFallback} textEvents={textEvents}/>
       <Text opacity="0" pointerEvents="none">
         {visibleFallback}
       </Text>
