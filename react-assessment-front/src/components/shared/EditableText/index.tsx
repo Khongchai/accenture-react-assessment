@@ -2,6 +2,8 @@ import { Input } from "@chakra-ui/input";
 import { Box, Text } from "@chakra-ui/layout";
 import React, { useState } from "react";
 
+//!DO NOT USE PRETTIER WITH THIS FILE; EVERYTHING WILL GET REALLY MESSY
+
 /**
  * All arguments must return true for chaining purposes
  */
@@ -27,7 +29,6 @@ interface EditableTextProps {
 /**
  * An event-based editable text field.
  */
-//TODO => refactor logic
 const EditableText: React.FC<EditableTextProps> = ({
   defaultText,
   onSave,
@@ -47,7 +48,7 @@ const EditableText: React.FC<EditableTextProps> = ({
 
   const textEvents = {
     onClick: (e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
-      makeTextVisible((e as any).target.innerHTML) && editOn();
+      makeVisible((e as any).target.innerHTML) && editOn();
     },
   };
 
@@ -60,23 +61,23 @@ const EditableText: React.FC<EditableTextProps> = ({
       setLeadText(e.target.value);
     },
     onBlur: (e: React.ChangeEvent<HTMLInputElement>) => {
-      noChange(e.target.value, visibleFallback)
+      const newText = e.target.value;
+      noChange(newText, visibleFallback)
         ? editOff()
-          : isEmtpyString(e.target.value) 
-            ? performRejection(e.target.value) &&  editOff() && setLeadText(visibleFallback)
-              : noErrors(e.target.value) 
-                ? editOffAndSave(e.target.value) 
-                  : editOff() && performRejection(e.target.value) && setLeadText(visibleFallback)},
+          : isEmtpyString(newText) 
+            ? showErrorMessage(newText) && editOff() && setLeadText(visibleFallback)
+              : noErrors(newText) 
+                ?  performSave(newText) && makeVisible(newText) && editOff()
+                  : editOff() && showErrorMessage(newText) && setLeadText(visibleFallback)},
   };
 
   const isEmtpyString = (text: string) => !text.length;
   const noChange = (text1: string, text2: string) => text1 === text2;
-  const editOffAndSave = (newText: string) =>  performSave(newText) && makeTextVisible(newText) && editOff() && true
   const adjustWidthOnChange = (elem: HTMLInputElement) => {elem.style.width = elem.value.length + 2.5 + "ch"; return true};
   const noErrors = (newData: string) => !rejectCondition(newData);
   const performSave = (dataToSave: string) => onSave(dataToSave);
-  const makeTextVisible = (text: string) => {setVisibleFallback(text); return true};
-  const performRejection  =(rejectedText: string) =>  rejectionAction(rejectedText);
+  const makeVisible = (text: string) => {setVisibleFallback(text); return true};
+  const showErrorMessage  =(rejectedText: string) =>  rejectionAction(rejectedText);
   const editOff = () => {setEditable(false); return true};
   const editOn = () => {setEditable(true); return true};
 
