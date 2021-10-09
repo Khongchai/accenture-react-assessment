@@ -1,6 +1,5 @@
 import { Box, Flex } from "@chakra-ui/react";
 import React, { useEffect, useMemo } from "react";
-import ChevronsWrapper from "./ChevronsWrapper";
 import PageNum from "./PageNum";
 
 interface PaginationSelectorProps {
@@ -22,15 +21,14 @@ const PaginationSelector: React.FC<PaginationSelectorProps> = ({
 
   return (
     <Flex align="center" css={{ gap: "1.25rem" }}>
-      <ChevronsWrapper>
-        {numArr.map((thisNum) => (
-          <PageNum
-            thisNum={thisNum}
-            currentPage={currentPagePos}
-            setPage={() => setPage(thisNum)}
-          />
-        ))}
-      </ChevronsWrapper>
+      {numArr.map((thisNum) => (
+        <PageNum
+          key={thisNum}
+          thisNum={thisNum}
+          currentPage={currentPagePos}
+          setPage={() => setPage(thisNum)}
+        />
+      ))}
     </Flex>
   );
 };

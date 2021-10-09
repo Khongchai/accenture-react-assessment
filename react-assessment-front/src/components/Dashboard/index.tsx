@@ -1,9 +1,8 @@
 import { Box, Flex } from "@chakra-ui/layout";
 import { Divider } from "@chakra-ui/react";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { serverUrl } from "../../const/server";
 import Contact from "../../types/Contact";
-import { Paginator } from "../../utils/Paginator";
 import useDashboardFullLength from "../../utils/ui-utils/useDashboardFullLength";
 import useFetch from "../../utils/useFetch";
 import usePagination from "../../utils/usePagination";
@@ -21,7 +20,9 @@ const Dashboard: React.FC = () => {
   const [page, setPage] = useState(1);
   const [contacts, setContacts] = useState<Contact[]>([]);
 
-  useFetch(`${serverUrl}/contacts`, setContacts, [refetch, page]);
+  const [fetchUrl, setFetchUrl] = useState(`${serverUrl}/contacts`);
+
+  useFetch(fetchUrl, setContacts, [refetch, page, fetchUrl]);
 
   const {
     paginatedItems: paginatedContacts,
@@ -39,7 +40,7 @@ const Dashboard: React.FC = () => {
       width="100%"
       height="100%"
     >
-      <ActionSection />
+      <ActionSection setFetchUrl={setFetchUrl} />
       <Divider margin="1.25rem 0" type="blue" />
       <Box margin="1.25rem 0">
         <EditModeText />

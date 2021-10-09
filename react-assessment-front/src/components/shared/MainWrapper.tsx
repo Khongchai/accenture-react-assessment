@@ -13,6 +13,7 @@ const MainWrapper: React.FC = ({ children }) => {
       minH="100vh"
       height="100%"
     >
+      <HeaderWithLogo />
       {children}
     </Box>
   );

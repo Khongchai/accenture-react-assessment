@@ -3,10 +3,14 @@ import React from "react";
 import EditAndAddContactsButtons from "./EditAndAddButtons";
 import SearchBox from "./SearchBox";
 
-const ActionSection: React.FC = () => {
+interface ActionSectionType {
+  setFetchUrl: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const ActionSection: React.FC<ActionSectionType> = ({ setFetchUrl }) => {
   return (
     <Flex style={{ gap: "1rem" }} flexDir={["column", null, null, "row"]}>
-      <SearchBox />
+      <SearchBox setFetchUrl={setFetchUrl} />
       <Box marginLeft="auto">
         <EditAndAddContactsButtons />
       </Box>
@@ -14,4 +18,4 @@ const ActionSection: React.FC = () => {
   );
 };
 
-export default ActionSection;
+export default React.memo(ActionSection);

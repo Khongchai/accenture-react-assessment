@@ -43,9 +43,7 @@ const MobileRow: React.FC<MobileProps> = ({ contact }) => {
           />
         </Flex>
       </Stack>
-      <Box>
-        <DeleteButton id={contact.id} />
-      </Box>
+      <DeleteButton id={contact.id} />
     </Flex>
   );
 };

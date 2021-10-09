@@ -1,5 +1,6 @@
-import { Button, Img, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { DeleteIcon } from "@chakra-ui/icons";
+import { Box, Button, Img } from "@chakra-ui/react";
+import React, { useMemo, useState } from "react";
 import { useRefetchToggleStore } from "../components/GlobalStores/RefetchToggleStore";
 import { serverUrl } from "../const/server";
 import fetch from "../utils/fetch";
@@ -13,7 +14,6 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ id }) => {
   const { toggle: toggleRefetch } = useRefetchToggleStore((state) => state);
 
   const buttonOnClick = async () => {
-    console.log("askdj");
     setIsLoading(true);
     fetch(`${serverUrl}/contacts/${id}`, "DELETE")
       .then(() => {
@@ -25,17 +25,25 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ id }) => {
   };
 
   return (
-    <Button
-      onClick={buttonOnClick}
-      background="danger"
-      color="white"
-      iconSpacing={["0", null, null, null, "auto"]}
-      leftIcon={<Img src="assets/trash.svg" />}
-      _hover={{ opacity: 0.8 }}
-      padding="1rem"
-      isLoading={isLoading}
-    />
+    <Box onClick={buttonOnClick}>
+      <ButtonComponent isLoading={isLoading} />
+    </Box>
   );
 };
 
 export default DeleteButton;
+
+function ButtonComponent({ isLoading }: { isLoading: boolean }) {
+  return (
+    <Button
+      background="danger"
+      color="white"
+      iconSpacing={["0", null, null, null, "auto"]}
+      _hover={{ opacity: 0.8 }}
+      padding="1rem"
+      isLoading={isLoading}
+    >
+      <DeleteIcon />
+    </Button>
+  );
+}

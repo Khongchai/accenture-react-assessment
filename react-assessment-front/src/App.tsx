@@ -18,22 +18,23 @@ export const App = () => (
   <ChakraProvider theme={theme}>
     <ErrorModal />
     <Box position="relative" zIndex="1">
-      <MainWrapper>
-        <HeaderWithLogo />
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/">
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            <MainWrapper>
               <Landing />
-            </Route>
-            <Route exact path="/add">
+            </MainWrapper>
+          </Route>
+          <Route exact path="/add">
+            <MainWrapper>
               <Add />
-            </Route>
-            <Route>
-              <PageNotFound />
-            </Route>
-          </Switch>
-        </BrowserRouter>
-      </MainWrapper>
+            </MainWrapper>
+          </Route>
+          <Route>
+            <PageNotFound />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </Box>
     <BackgroundDecor />
   </ChakraProvider>
