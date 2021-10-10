@@ -14,7 +14,7 @@ import Info from "./Info";
 
 const Dashboard: React.FC = () => {
   const bg = useRef<HTMLElement>();
-  useDashboardFullLength(bg);
+  // useDashboardFullLength(bg);
 
   const refetch = useRefetchToggleStore((state) => state.refetch);
   const [page, setPage] = useState(1);
@@ -36,7 +36,8 @@ const Dashboard: React.FC = () => {
       backgroundColor={["white", null, null, "lightBlue"]}
       borderRadius={["15px 15px 0 0", null, null, "90px 90px 0 0"]}
       minHeight={["500px", null, "600px", null, "700px"]}
-      padding={["1rem", null, null, "70px 2.5rem", "70px 2.5rem"]}
+      //Buttom padding is taken care of by the pagination component
+      padding={["1rem", null, null, "70px 2.5rem 0 2.5rem"]}
       width="100%"
       height="100%"
     >
@@ -52,7 +53,7 @@ const Dashboard: React.FC = () => {
         <>
           <Info contacts={paginatedContacts} />
           <Flex>
-            <Box marginLeft="auto">
+            <Box marginLeft="auto" padding="1.75rem 0 2.75rem 0">
               <PaginationSelector
                 setPage={setPage}
                 totalPages={totalPages}

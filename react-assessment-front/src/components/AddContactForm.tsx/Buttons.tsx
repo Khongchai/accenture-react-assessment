@@ -34,9 +34,6 @@ const Buttons: React.FC<ButtonsProps> = ({ isSubmitting }) => {
         </Link>
       </Box>
       <EditModeButton />
-      <Button isLoading={isSubmitting}>
-        {isSubmitting ? "submitting" : "not submitting"}{" "}
-      </Button>
       <SecondaryBackgroundStyledButton
         buttonProps={{
           leftIcon: <Img src="assets/person_add.svg" />,
