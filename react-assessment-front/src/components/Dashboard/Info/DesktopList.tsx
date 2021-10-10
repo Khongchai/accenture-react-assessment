@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import React from "react";
 import Contact from "../../../types/Contact";
 import DesktopRow from "./Row/Desktop";
@@ -27,7 +27,7 @@ const DesktopList: React.FC<DesktopListType> = ({ contacts }) => {
             <th></th>
           </tr>
         </thead>
-        <tbody id="table-list">
+        <tbody style={{ position: "relative" }} id="table-list">
           {contacts.map((contact) => (
             <DesktopRow key={contact.id} contact={contact} />
           ))}
