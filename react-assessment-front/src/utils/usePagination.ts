@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { Paginator } from "./Paginator";
 
 export default function usePagination<T>(
-  items: T[],
+  items = [] as T[],
   page: number,
   extraDependencies = [] as any[]
 ) {

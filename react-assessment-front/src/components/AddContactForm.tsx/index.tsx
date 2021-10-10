@@ -17,12 +17,17 @@ const AddContactForm: React.FC = () => {
       onSubmit={async (values, { setFieldError, setSubmitting }) => {
         const errorExist = getError(values, setFieldError);
         if (!errorExist)
-          fetch(serverUrl + "/contacts", "POST", JSON.stringify(values)).then(
-            () => {
+          fetch(serverUrl + "/contacts", "POST", JSON.stringify(values))
+            .then(() => {
               toggleRefetch();
+            })
+            .then(() => {
+              /**
+               * Note: this does not really work, we need another global fetching status to ensure that the
+               * global refetch finishes loading.
+               */
               setSubmitting(false);
-            }
-          );
+            });
       }}
     >
       {({ isSubmitting }) => (

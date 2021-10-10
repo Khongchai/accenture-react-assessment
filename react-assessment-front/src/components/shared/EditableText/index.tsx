@@ -61,16 +61,24 @@ const EditableText: React.FC<EditableTextProps> = ({
       adjustWidthOnChange(e.target);
       setLeadText(e.target.value);
     },
+    onKeyPress: (e: any) => {
+      e.key === "Enter" && handleTextEdit(e.target.value);
+    },
     onBlur: (e: React.ChangeEvent<HTMLInputElement>) => {
-      const newText = e.target.value;
-      noChange(newText, visibleFallback)
-        ? editOff()
-          : isEmtpyString(newText) 
-            ? showErrorMessage(newText) && editOff() && setLeadText(visibleFallback)
-              : noErrors(newText) 
-                ?  performSave(newText) && makeVisible(newText) && editOff()
-                  : editOff() && showErrorMessage(newText) && setLeadText(visibleFallback)},
+      handleTextEdit(e.target.value);
+      }
   };
+
+  function handleTextEdit(newText: string)
+  {
+    noChange(newText, visibleFallback)
+      ? editOff()
+        : isEmtpyString(newText) 
+          ? showErrorMessage(newText) && editOff() && setLeadText(visibleFallback)
+            : noErrors(newText) 
+              ?  performSave(newText) && makeVisible(newText) && editOff()
+                : editOff() && showErrorMessage(newText) && setLeadText(visibleFallback)
+  }
 
   const isEmtpyString = (text: string) => !text.length;
   const noChange = (text1: string, text2: string) => text1 === text2;

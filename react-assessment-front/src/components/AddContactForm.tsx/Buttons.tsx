@@ -1,7 +1,7 @@
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import { Box, Flex } from "@chakra-ui/layout";
-import { Img, Text } from "@chakra-ui/react";
-import React from "react";
+import { Button, Img, Text } from "@chakra-ui/react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import SecondaryBackgroundStyledButton from "../../StyledElements/SecondaryBackgroundStyledButton";
 import SecondaryBorderStyledButton from "../../StyledElements/SecondaryBorderStyledButton";
@@ -34,6 +34,9 @@ const Buttons: React.FC<ButtonsProps> = ({ isSubmitting }) => {
         </Link>
       </Box>
       <EditModeButton />
+      <Button isLoading={isSubmitting}>
+        {isSubmitting ? "submitting" : "not submitting"}{" "}
+      </Button>
       <SecondaryBackgroundStyledButton
         buttonProps={{
           leftIcon: <Img src="assets/person_add.svg" />,

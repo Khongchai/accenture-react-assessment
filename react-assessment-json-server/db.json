@@ -27,7 +27,7 @@
       "id": 2,
       "name": "Ervin Howell",
       "username": "Antonette",
-      "email": "Shanna@melissa.tv",
+      "email": "Shanna@melissa.tvs",
       "address": {
         "street": "Victor Plains",
         "suite": "Suite 879",
@@ -229,6 +229,12 @@
         "catchPhrase": "Centralized empowering task-force",
         "bs": "target end-to-end models"
       }
+    },
+    {
+      "name": "Khongchai Greesuradej",
+      "email": "k.greesuradej@accenture.com",
+      "phone": "+66930971746",
+      "id": 11
     }
   ]
 }

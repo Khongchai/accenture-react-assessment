@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/layout";
+import { Box, Flex, Text } from "@chakra-ui/layout";
 import { Divider } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
 import { serverUrl } from "../../const/server";
@@ -18,7 +18,7 @@ const Dashboard: React.FC = () => {
 
   const refetch = useRefetchToggleStore((state) => state.refetch);
   const [page, setPage] = useState(1);
-  const [contacts, setContacts] = useState<Contact[]>([]);
+  const [contacts, setContacts] = useState<Contact[] | undefined>(undefined);
 
   const [fetchUrl, setFetchUrl] = useState(`${serverUrl}/contacts`);
 
@@ -48,16 +48,22 @@ const Dashboard: React.FC = () => {
       <Box margin="1.25rem 0">
         <EditModeText />
       </Box>
-      <Info contacts={paginatedContacts} />
-      <Flex>
-        <Box marginLeft="auto">
-          <PaginationSelector
-            setPage={setPage}
-            totalPages={totalPages}
-            currentPagePos={currentPagePos}
-          />
-        </Box>
-      </Flex>
+      {contacts ? (
+        <>
+          <Info contacts={paginatedContacts} />
+          <Flex>
+            <Box marginLeft="auto">
+              <PaginationSelector
+                setPage={setPage}
+                totalPages={totalPages}
+                currentPagePos={currentPagePos}
+              />
+            </Box>
+          </Flex>
+        </>
+      ) : (
+        <Text>...Loading</Text>
+      )}
     </Box>
   );
 };

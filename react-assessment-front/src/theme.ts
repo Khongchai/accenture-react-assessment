@@ -2,8 +2,8 @@ import { extendTheme } from "@chakra-ui/react";
 
 const theme = extendTheme({
   fonts: {
-    body: "Selawik",
-    heading: "Selawik",
+    body: "Selawik Regular",
+    heading: "Selawik Bold",
   },
   colors: {
     primary: "#165A82",
