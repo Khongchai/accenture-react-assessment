@@ -95,7 +95,7 @@ const EditableText: React.FC<EditableTextProps> = ({
       <ConditionalInput inputEvents={inputEvents} on={editable} inputValue={leadText}/>
       <PlaceHolderText editable={editable} text={visibleFallback} textEvents={textEvents}/>
       <Text opacity="0" pointerEvents="none">
-        {visibleFallback}
+        {leadText}
       </Text>
     </Box>
   );
